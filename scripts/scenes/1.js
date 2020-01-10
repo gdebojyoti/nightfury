@@ -28,11 +28,6 @@ class Scene1 extends Phaser.Scene {
       physicsImage.setVelocity(Phaser.Math.RND.integerInRange(-100, 100), -300)
     })
 
-    this.input.keyboard.on('keydown', e => {
-      // restart scene
-      e.key === 'r' && this.scene.start('Example1')
-    })
-
     const tween = this.tweens.add({
       targets: [this.text],
       x: 200,
