@@ -1,3 +1,8 @@
+const constants = {
+  MOVEMENT_SPEED: 2,
+  SCREEN_OFFSET: 200
+}
+
 class SampleScene extends Phaser.Scene {
   constructor () {
     super({ key: 'SampleScene' })
@@ -24,7 +29,7 @@ class SampleScene extends Phaser.Scene {
     this.anims.create({
       key: 'doggoidle',
       frames: this.anims.generateFrameNumbers('doggoidle'),
-      frameRate: 24,
+      frameRate: 8,
       repeat: -1
     })
     this.anims.create({
@@ -46,6 +51,7 @@ class SampleScene extends Phaser.Scene {
     this.player.setCollideWorldBounds(true)
     this.player.setOrigin(0, 0)
     this.player.setScale(.25)
+    // this.player.setTint(0x00ff00)
     this.player.anims.play('doggowalk', true)
 
     this.physics.add.collider(this.player, platforms)
@@ -68,14 +74,20 @@ class SampleScene extends Phaser.Scene {
     // poll for arrow keys
     if (this.cursors) {
       if (this.cursors.left.isDown) {
-        this.player.setVelocityX(-160)
         this.player.flipX = true
         animation = 'doggowalk'
+        this.player.x -= constants.MOVEMENT_SPEED
+        // if (this.player.x >= constants.SCREEN_OFFSET) {
+        //   this.cameras.main.scrollX -= constants.MOVEMENT_SPEED
+        // }
       }
       else if (this.cursors.right.isDown) {
-        this.player.setVelocityX(160)
         this.player.flipX = false
         animation = 'doggowalk'
+        this.player.x += constants.MOVEMENT_SPEED
+        // if (this.player.x > constants.SCREEN_OFFSET) {
+        //   this.cameras.main.scrollX += constants.MOVEMENT_SPEED
+        // }
       }
       else {
         this.player.setVelocityX(0)
@@ -93,5 +105,8 @@ class SampleScene extends Phaser.Scene {
     }
 
     this.player.anims.play(animation, isLooping)
+
+    // camera follows player when it has moved by at least "SCREEN_OFFSET" px
+    this.cameras.main.scrollX = Math.max(this.player.x - constants.SCREEN_OFFSET, 0)
   }
 }
