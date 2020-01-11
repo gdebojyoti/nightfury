@@ -3,9 +3,9 @@ const constants = {
   SCREEN_OFFSET: 200
 }
 
-class SampleScene extends Phaser.Scene {
+class Editor extends Phaser.Scene {
   constructor () {
-    super({ key: 'SampleScene' })
+    super({ key: 'Editor' })
   }
 
   preload () {
@@ -59,8 +59,8 @@ class SampleScene extends Phaser.Scene {
 
     this.input.keyboard.on('keydown', e => {
       switch (e.key) {
-        case '1': this.scene.start('Example1'); break
-        case 'r': this.scene.start('SampleScene'); break
+        case '2': this.scene.start('Play'); break
+        case 'r': this.scene.start('Editor'); break
       }
     })
 

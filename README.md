@@ -10,7 +10,9 @@ Studio for platformers
 * Camera movement (follow player)
 * Melee enemies
 * Game over & restarts
-* Save & export map
+* Map creator
+* Import map from JSON
+* Save & export map to JSON
 * User profile
 
 ## Advanced features

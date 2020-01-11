@@ -10,7 +10,7 @@ const config = {
       }
     }
   },
-  scene: [SampleScene, Scene1],
+  scene: [Editor, Play],
   backgroundColor: '#06C6F8'
 }
 
