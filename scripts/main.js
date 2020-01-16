@@ -7,11 +7,15 @@ const config = {
     arcade: {
       gravity: {
         y: 980
-      }
+      },
+      debug: true
     }
   },
   scene: [Editor, Play],
-  backgroundColor: '#06C6F8'
+  title: 'Project Nightfury',
+  backgroundColor: '#06C6F8',
+  // transparent: true,
+  disableContextMenu: true
 }
 
 const game = new Phaser.Game(config)
