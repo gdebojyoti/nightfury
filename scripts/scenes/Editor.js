@@ -1,4 +1,4 @@
-const constants = {
+const gameConstants = {
   MOVEMENT_SPEED: 2,
   SCREEN_OFFSET: 200
 }
@@ -68,19 +68,19 @@ class Editor extends Phaser.Scene {
     platforms.add(this.add.tileSprite(128, 512, 768, 128, 'ground').setOrigin(0,0))
     platforms.add(this.add.tileSprite(896, 512, 128, 128, 'groundR').setOrigin(0,0))
 
-
-    this.player = this.physics.add.sprite(0, 350, 'doggowalk')
-    this.player.name = 'Doggo!'
-    // this.player.setCollideWorldBounds(true) // make player stay inside canvas boundary
-    this.player.setOrigin(0, 0)
-    this.player.setScale(.25) // size of gameobject
-    this.player.setSize(270, 460) // size of hitbox
-    this.player.setOffset(120, 10) // location of hitbox
-    // this.player.setTint(0x00ff00)
-    this.player.anims.play('doggowalk', true)
-
-    this.physics.add.collider(this.player, platforms)
-
+    this.player = new Player({
+      scene: this,
+      config: {
+        name: 'Poopy',
+        position: { x: 300, y: 300 }
+      },
+      animations: {
+        IDLE: 'doggoidle',
+        WALK: 'doggowalk',
+        JUMP: 'doggojump'
+      },
+      objects: [platforms]
+    })
 
     this.input.keyboard.on('keydown', e => {
       switch (e.key) {
@@ -103,41 +103,11 @@ class Editor extends Phaser.Scene {
   }
 
   update () {
-    let animation = 'doggoidle' // idle animation by default
-    let isLooping = true // whether to loop animation infinitely, or just run it once
-
-    // poll for arrow keys
-    if (this.cursors) {
-      if (this.cursors.left.isDown) {
-        this.player.flipX = true
-        this.player.setOffset(160, 10)
-
-        // walk left if inside game world
-        if (this.player.x > 0) {
-          animation = 'doggowalk'
-          this.player.x -= constants.MOVEMENT_SPEED
-        }
-      }
-      else if (this.cursors.right.isDown) {
-        this.player.flipX = false
-        this.player.setOffset(120, 10)
-        if (!this.player.body.onWall()) {
-          animation = 'doggowalk'
-        }
-        this.player.x += constants.MOVEMENT_SPEED
-      }
-
-      // jump animation on pressing UP (and when player is on the "ground")
-      if (this.cursors.up.isDown && this.player.body.onFloor()) {
-        this.player.setVelocityY(-750);
-        // animation = 'doggojump'
-      }
-    }
-
-    this.player.anims.play(animation, isLooping)
+    // run 'update' method of 'player'
+    this.player.update({ cursors: this.cursors })
 
     // camera follows player when it has moved by at least "SCREEN_OFFSET" px
-    this.cameras.main.scrollX = Math.max(this.player.x - constants.SCREEN_OFFSET, 0)
+    this.cameras.main.scrollX = Math.max(this.player.body.x - gameConstants.SCREEN_OFFSET, 0)
 
     // run 'update' method of 'enemy'
     this.enemy.update()
