@@ -15,10 +15,16 @@ class Editor extends Phaser.Scene {
     this.load.image('ground', '../../assets/images/ground.png')
     this.load.image('cat', '../../assets/images/cat.png')
 
-    // load spritesheets
+    // load dog spritesheets
     this.load.spritesheet('doggowalk', '../../assets/sprites/dog/walk.png', { frameWidth: 547, frameHeight: 481 })
     this.load.spritesheet('doggoidle', '../../assets/sprites/dog/idle.png', { frameWidth: 547, frameHeight: 481 })
     this.load.spritesheet('doggojump', '../../assets/sprites/dog/jump.png', { frameWidth: 547, frameHeight: 481 })
+
+    // load spritesheets for mage
+    this.load.spritesheet('magewalk', '../../assets/sprites/mage/walk.png', { frameWidth: 128, frameHeight: 128 })
+    this.load.spritesheet('mageidle', '../../assets/sprites/mage/idle.png', { frameWidth: 128, frameHeight: 128 })
+    this.load.spritesheet('magejump', '../../assets/sprites/mage/jump.png', { frameWidth: 128, frameHeight: 128 })
+    this.load.spritesheet('mageattackheavy', '../../assets/sprites/mage/attackHeavy.png', { frameWidth: 128, frameHeight: 128 })
 
     // load atlas
     this.load.atlas('sea', '../../assets/atlas/seacreatures.png', '../../assets/atlas/seacreatures.json');
@@ -46,6 +52,31 @@ class Editor extends Phaser.Scene {
       repeat: 1
     })
 
+    this.anims.create({
+      key: 'magewalk',
+      frames: this.anims.generateFrameNumbers('magewalk'),
+      frameRate: 24,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'mageidle',
+      frames: this.anims.generateFrameNumbers('mageidle'),
+      frameRate: 8,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'magejump',
+      frames: this.anims.generateFrameNumbers('magejump'),
+      frameRate: 12,
+      repeat: 1
+    })
+    this.anims.create({
+      key: 'mageattackheavy',
+      frames: this.anims.generateFrameNumbers('mageattackheavy'),
+      frameRate: 16,
+      repeat: 0
+    })
+
     // dummy jellyfish; test subject for atlas; will be deleted later
     this.anims.create({
       key: 'jellyfish',
@@ -68,16 +99,35 @@ class Editor extends Phaser.Scene {
     platforms.add(this.add.tileSprite(128, 512, 768, 128, 'ground').setOrigin(0,0))
     platforms.add(this.add.tileSprite(896, 512, 128, 128, 'groundR').setOrigin(0,0))
 
+    // keyboard listeners
+    this.cursors = this.input.keyboard.createCursorKeys()
+    this.keys = this.input.keyboard.addKeys('D')
+
+    // this.doggo = new Player({
+    //   scene: this,
+    //   config: {
+    //     name: 'Poopy',
+    //     position: { x: 50, y: 300 }
+    //   },
+    //   animations: {
+    //     IDLE: 'doggoidle',
+    //     WALK: 'doggowalk',
+    //     JUMP: 'doggojump'
+    //   },
+    //   objects: [platforms]
+    // })
+
     this.player = new Player({
       scene: this,
       config: {
-        name: 'Poopy',
+        name: 'Alicia',
         position: { x: 300, y: 300 }
       },
       animations: {
-        IDLE: 'doggoidle',
-        WALK: 'doggowalk',
-        JUMP: 'doggojump'
+        IDLE: 'mageidle',
+        WALK: 'magewalk',
+        JUMP: 'magejump',
+        ATTACK: 'mageattackheavy'
       },
       objects: [platforms]
     })
@@ -87,9 +137,10 @@ class Editor extends Phaser.Scene {
         case '2': this.scene.start('Play'); break
         case 'r': this.scene.start('Editor'); break
       }
+      
+      // trigger key listener for player
+      this.player.onKeyDown(e)
     })
-
-    this.cursors = this.input.keyboard.createCursorKeys()
 
     // create and add enemy character to scene
     this.enemy = new Enemy({
