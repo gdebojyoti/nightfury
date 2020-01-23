@@ -1,5 +1,4 @@
-// class Player extends Phaser.GameObjects.Sprite {
-class Player extends Phaser.Physics.Arcade.Sprite {
+class Player extends Phaser.GameObjects.Sprite {
   constructor (config) {
     super(config.scene)
 
@@ -15,6 +14,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       } = {},
       isFlipped = false
     } = config
+
+    // private methods
+    this._scene = scene
 
     this.animations = animations
 
@@ -53,12 +55,25 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
         this.isAttacking = true
         this.body.anims.play(this.animations.ATTACK)
+        this.fireWeapon()
         this.body.once('animationcomplete', () => {
           this.isAttacking = false
         })
         break
       }
     }
+  }
+
+  fireWeapon () {
+    new Bullet({
+      scene: this._scene,
+      position: {
+        x: this.body.x,
+        y: this.body.y
+      },
+      isFlipped: this.body.flipX,
+      animation: this.animations.FIRE
+    })
   }
 
   // handle movement & jumping

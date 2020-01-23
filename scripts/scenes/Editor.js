@@ -25,6 +25,7 @@ class Editor extends Phaser.Scene {
     this.load.spritesheet('mageidle', '../../assets/sprites/mage/idle.png', { frameWidth: 128, frameHeight: 128 })
     this.load.spritesheet('magejump', '../../assets/sprites/mage/jump.png', { frameWidth: 128, frameHeight: 128 })
     this.load.spritesheet('mageattackheavy', '../../assets/sprites/mage/attackHeavy.png', { frameWidth: 128, frameHeight: 128 })
+    this.load.spritesheet('magefireheavy', '../../assets/sprites/mage/fireHeavy.png', { frameWidth: 128, frameHeight: 128 })
 
     // load atlas
     this.load.atlas('sea', '../../assets/atlas/seacreatures.png', '../../assets/atlas/seacreatures.json');
@@ -73,6 +74,12 @@ class Editor extends Phaser.Scene {
     this.anims.create({
       key: 'mageattackheavy',
       frames: this.anims.generateFrameNumbers('mageattackheavy'),
+      frameRate: 16,
+      repeat: 0
+    })
+    this.anims.create({
+      key: 'magefireheavy',
+      frames: this.anims.generateFrameNumbers('magefireheavy'),
       frameRate: 16,
       repeat: 0
     })
@@ -127,7 +134,8 @@ class Editor extends Phaser.Scene {
         IDLE: 'mageidle',
         WALK: 'magewalk',
         JUMP: 'magejump',
-        ATTACK: 'mageattackheavy'
+        ATTACK: 'mageattackheavy',
+        FIRE: 'magefireheavy'
       },
       objects: [platforms]
     })
