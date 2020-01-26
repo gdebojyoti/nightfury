@@ -1,3 +1,5 @@
+import { gameConstants } from 'constants'
+
 class Enemy extends Phaser.GameObjects.Sprite {
   constructor (config) {
     const { scene, graphic, x, y, objects, players } = config
@@ -49,3 +51,5 @@ class Enemy extends Phaser.GameObjects.Sprite {
     this.body.flipX = isFlipped
   }
 }
+
+export default Enemy

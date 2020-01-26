@@ -1,3 +1,6 @@
+import Bullet from 'prefabs/Bullet'
+import { gameConstants } from 'constants'
+
 class Player extends Phaser.GameObjects.Sprite {
   constructor (config) {
     super(config.scene)
@@ -134,3 +137,5 @@ class Player extends Phaser.GameObjects.Sprite {
     this.checkInputAndMove(cursors)
   }
 }
+
+export default Player

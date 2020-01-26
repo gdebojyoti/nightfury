@@ -1,10 +1,12 @@
+import logo from 'assets/images/logo'
+
 class Play extends Phaser.Scene {
   constructor () {
     super({ key: 'Play' })
   }
 
   preload () {
-    this.load.image('meow', '../../assets/images/logo.png')
+    this.load.image('meow', logo)
   }
 
   create () {
@@ -44,3 +46,5 @@ class Play extends Phaser.Scene {
     })
   }
 }
+
+export default Play

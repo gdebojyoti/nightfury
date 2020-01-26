@@ -1,3 +1,10 @@
+import Phaser from 'phaser' // global
+
+import Editor from 'scenes/Editor'
+import Play from 'scenes/Play'
+
+import 'stylesheets'
+
 const config = {
   type: Phaser.AUTO,
   width: 1024,
@@ -14,7 +21,7 @@ const config = {
   scene: [Editor, Play],
   title: 'Project Nightfury',
   backgroundColor: '#06C6F8',
-  // transparent: true,
+  transparent: true,
   disableContextMenu: true
 }
 

@@ -23,3 +23,9 @@ Studio for platformers
 * [ ] Ranged enemies
 * [ ] Health bars
 * [ ] Premium stuff
+
+## Dev Features
+
+* [x] Webpack integration (dev server running on port 31291)
+* [ ] Seamless deployment
+* [ ] Testing framework integration

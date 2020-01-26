@@ -37,3 +37,5 @@ class Bullet extends Phaser.GameObjects.Sprite {
     this.body.setVelocityX(isFlipped ? -SPEED : SPEED)
   }
 }
+
+export default Bullet
