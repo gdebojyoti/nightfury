@@ -1,7 +1,8 @@
 import Phaser from 'phaser' // global
 
-import Editor from 'scenes/Editor'
-import Play from 'scenes/Play'
+import Map from 'scenes/Map'
+// import Editor from 'scenes/Editor'
+// import Play from 'scenes/Play'
 
 import 'stylesheets'
 
@@ -12,13 +13,10 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: {
-        y: 980
-      },
       debug: true
     }
   },
-  scene: [Editor, Play],
+  scene: [Map],
   title: 'Project Nightfury',
   backgroundColor: '#06C6F8',
   transparent: true,

@@ -24,11 +24,6 @@ class Editor extends Phaser.Scene {
     this.load.image('ground', ground)
     this.load.image('cat', cat)
 
-    // // load dog spritesheets
-    // this.load.spritesheet('doggowalk', '../../assets/sprites/dog/walk.png', { frameWidth: 547, frameHeight: 481 })
-    // this.load.spritesheet('doggoidle', '../../assets/sprites/dog/idle.png', { frameWidth: 547, frameHeight: 481 })
-    // this.load.spritesheet('doggojump', '../../assets/sprites/dog/jump.png', { frameWidth: 547, frameHeight: 481 })
-
     // load spritesheets for mage
     this.load.spritesheet('magewalk', magewalk, { frameWidth: 128, frameHeight: 128 })
     this.load.spritesheet('mageidle', mageidle, { frameWidth: 128, frameHeight: 128 })
@@ -41,27 +36,6 @@ class Editor extends Phaser.Scene {
   }
 
   create () {
-    // this.cameras.main.setBackgroundColor(0xbababa)
-
-    // this.anims.create({
-    //   key: 'doggowalk',
-    //   frames: this.anims.generateFrameNumbers('doggowalk'),
-    //   frameRate: 24,
-    //   repeat: -1
-    // })
-    // this.anims.create({
-    //   key: 'doggoidle',
-    //   frames: this.anims.generateFrameNumbers('doggoidle'),
-    //   frameRate: 8,
-    //   repeat: -1
-    // })
-    // this.anims.create({
-    //   key: 'doggojump',
-    //   frames: this.anims.generateFrameNumbers('doggojump'),
-    //   frameRate: 24,
-    //   repeat: 1
-    // })
-
     this.anims.create({
       key: 'magewalk',
       frames: this.anims.generateFrameNumbers('magewalk'),
@@ -118,20 +92,6 @@ class Editor extends Phaser.Scene {
     // keyboard listeners
     this.cursors = this.input.keyboard.createCursorKeys()
     this.keys = this.input.keyboard.addKeys('D')
-
-    // // this.doggo = new Player({
-    // //   scene: this,
-    // //   config: {
-    // //     name: 'Poopy',
-    // //     position: { x: 50, y: 300 }
-    // //   },
-    // //   animations: {
-    // //     IDLE: 'doggoidle',
-    // //     WALK: 'doggowalk',
-    // //     JUMP: 'doggojump'
-    // //   },
-    // //   objects: [platforms]
-    // // })
 
     this.player = new Player({
       scene: this,

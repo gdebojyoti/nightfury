@@ -31,22 +31,25 @@ class Enemy extends Phaser.GameObjects.Sprite {
 
   update () {
     let isFlipped = false
+    let velocityX = 0
 
     // moves between x=100 & x=500
     if (this.isReversed) {
       if (this.body.x < 100) {
         this.isReversed = false
       } else {
-        this.body.x -= gameConstants.MOVEMENT_SPEED
+        velocityX = -gameConstants.MOVEMENT_SPEED
         isFlipped = true
       }
     } else {
       if (this.body.x > 500) {
         this.isReversed = true
       } else {
-        this.body.x += gameConstants.MOVEMENT_SPEED
+        velocityX = gameConstants.MOVEMENT_SPEED
       }
     }
+
+    this.body.setVelocityX(velocityX)
 
     this.body.flipX = isFlipped
   }
